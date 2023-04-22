@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  app-db:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=a-password
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: psql -U postgres -q -d postgres -c "SELECT 'ready';"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+  axum_backend:
+    build: .
+    ports:
+      - '8080:8080'
+    depends_on:
+      - app-db
+  yew_frontend:
+    build: ./../yew_frontend_docker/.
+    ports:
+      - '3000:3000'
+    depends_on:
+      - axum_backend
+
+volumes:
+  db-data: {}

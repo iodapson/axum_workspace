@@ -1,0 +1,8 @@
+[workspace]
+members = [
+    "axum_postgre_docker",
+    "yew_frontend_docker",
+]
+exclude = [
+    "steps"
+]
