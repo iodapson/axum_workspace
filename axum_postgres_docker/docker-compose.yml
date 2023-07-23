@@ -19,15 +19,9 @@ services:
   axum_backend:
     build: .
     ports:
-      - '8080:8080'
+      - '8090:8090'
     depends_on:
       - app-db
-  yew_frontend:
-    build: ./../yew_frontend_docker/.
-    ports:
-      - '3000:3000'
-    depends_on:
-      - axum_backend
 
 volumes:
   db-data: {}
