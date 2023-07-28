@@ -4,8 +4,11 @@ services:
   app-db:
     image: postgres:latest
     restart: always
+    env_file: .env
     environment:
-      - POSTGRES_PASSWORD=a-password
+      - POSTGRES_PASSWORD=${POSTGRES_PWD}
+      - POSTGRES_USER=${POSTGRES_USR}
+      - POSTGRES_DB=${POSTGRES_DB}
     ports:
       - 5432:5432
     volumes:
@@ -17,11 +20,15 @@ services:
       retries: 5
       start_period: 5s
   axum_backend:
-    build: .
+    #build: .
+    image: axum_postgres_docker_2:1.0
+    env_file: .env
+    # The container port must match the exposed port (8090) in 'Dockerfile', but you can use any other browser port e.g, 8070:8090, 8080:8090, e.t.c.
     ports:
-      - '8090:8090'
+      - 8090:8090
     depends_on:
-      - app-db
+      app-db:
+        condition: service_healthy
 
 volumes:
   db-data: {}

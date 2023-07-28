@@ -12,6 +12,11 @@ COPY Cargo.toml /usr/src/axum_postgres_docker/
 # Set the working directory
 WORKDIR /usr/src/axum_postgres_docker
 
+# Install 'musl-tools' to enable successful image build
+RUN apt-get -y update
+RUN apt-get -y upgrade
+RUN apt-get -y install musl-tools
+
 ## Install target platform (Cross-Compilation) --> Needed for Alpine
 RUN rustup target add x86_64-unknown-linux-musl
 
@@ -21,8 +26,9 @@ RUN cargo build --target x86_64-unknown-linux-musl --release
 # Now copy in the rest of the sources
 COPY src /usr/src/axum_postgres_docker/src/
 
-# Copy your migrations too
+# Copy your migrations and file 'build.rs' too
 COPY migrations /usr/src/axum_postgres_docker/migrations
+COPY build.rs /usr/src/axum_postgres_docker
 
 ## Touch mainlrs to prevent cached release build
 RUN touch /usr/src/axum_postgres_docker/src/main.rs
@@ -39,5 +45,5 @@ COPY --from=builder /usr/src/axum_postgres_docker/target/x86_64-unknown-linux-mu
 
 EXPOSE 8090
 
-# Run the application
+# Run the application via 'axum_postgres_docker.exe'
 CMD ["/usr/local/bin/axum_postgres_docker"]
