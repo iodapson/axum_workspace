@@ -21,7 +21,7 @@ services:
       start_period: 5s
   axum_backend:
     #build: .
-    image: axum_postgres_docker_2:1.0
+    image: axum_postgres_docker:1.0
     env_file: .env
     # The container port must match the exposed port (8090) in 'Dockerfile', but you can use any other browser port e.g, 8070:8090, 8080:8090, e.t.c.
     ports:

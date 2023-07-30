@@ -1,4 +1,4 @@
 /target
 /steps
-/axum_postgre_docker/.env
+/axum_postgres_docker/.env
 /yew_frontend_docker
