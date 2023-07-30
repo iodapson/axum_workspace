@@ -58,6 +58,8 @@ You should see a welcome page saying that "Welcome! This Rust Axum app is now Ru
 
 ### Project Maintainance (Locally)
 
+Follow this section of this guide to rurun an updated app with code changes inside Docker.
+
 - Take down spun-up docker containers by running command `docker-compose down` OR `docker compose down` from inside directory `axum_workspace/axum_postgres_docker`.
 
 ```
@@ -82,5 +84,5 @@ OR
 docker image rm axum_postgres_docker:1.0
 ```
 
-- Finally, after running commands `docker compose down`, `docker rmi axum_postgres_docker:1.0`, and `docker volume rm axum_postgres_docker_db-data` one at a time, rebuild a new docker image, and run `docker-compose up` again to build a new Docker image and spin up container respectively with you code changes.
-  Refer back to `Step 2` and `Step 3` for reference on how to build a new docker image, and spin up new Docker containers containers respectively.
+- Finally, after you have run commands `docker compose down`, `docker rmi axum_postgres_docker:1.0`, and `docker volume rm axum_postgres_docker_db-data` one at a time, you can now begin the image building and container spin up process again.
+  Refer back to `Step 2` and `Step 3` for a reference on how to build a new docker image, and spin up new Docker containers containers respectively.
