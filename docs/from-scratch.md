@@ -1,6 +1,12 @@
-- Create a Rust project, preferably a workspace
+#### You may start here
 
-- Create a workspace by first creating a Cargo.toml file with the following similar content:
+You may follow these steps:
+
+- 1. Create a Rust project, preferably a workspace, and cd into it.
+
+`mkdir axum_workspace` and `cd axum_workspace`
+
+- 2. Create a workspace by first creating a Cargo.toml file with the following similar content:
 
 ```toml
 [workspace]
@@ -9,17 +15,21 @@ members = [
     "leptos_frontend"
 ]
 exclude = [
-    "steps"
+    "docs"
 ]
 ```
 
-- Now run `cargo build` from inside your workspace's root directory.
+- 3. Create the first member crate called `axum_postgres_docker`.
 
-- Create a migrations directory inside `axum_postgres_docker` and add its initial boilerplate file (SQL code for your code logic) if available
+```
+cargo new axum_postgres_docker
+```
 
-- Creat a '.env' file inside member crate `axum_workspace`'s root directory.
+- 4. Create a migrations directory inside `axum_postgres_docker` and add its initial boilerplate file (SQL code for your code logic) if available.
 
-- Create your database credentials inside `.env`. You can use the following as a starter template:
+- 5. Create a '.env' file inside member crate `axum_workspace`'s root directory.
+
+- 6. Create your database credentials inside `.env`. You can use the following as a starter template:
 
 ```.env
 POSTGRES_USR=postgres
@@ -32,7 +42,7 @@ POSTGRES_DB=app-db
 DATABASE_URL=postgres://${POSTGRES_USR}:${POSTGRES_PWD}@app-db:5432/${POSTGRES_DB}
 ```
 
-- Dependency installations before adding source-code:
+- 7. Dependency installations before adding source-code:
 
 `cargo add axum`
 `cargo add tokio -F "full"`
@@ -47,4 +57,6 @@ DATABASE_URL=postgres://${POSTGRES_USR}:${POSTGRES_PWD}@app-db:5432/${POSTGRES_D
 
 `cargo install sqlx-cli`
 
-- Apply the code inside member crate `axum_postgres_docker` of inside this workspace repo.
+- 8. Apply the code inside member crate `axum_postgres_docker` of inside this workspace repo.
+
+- 9. Run `cargo build`. Refer back to the repo's README.md for instructions on how to build a docker image for the project, and spin-up docker containers.
