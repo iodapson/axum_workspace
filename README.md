@@ -1,3 +1,13 @@
+## Brief Description
+
+This project can be used both as template, and also be a guide. So far so good though, it is currently only available as a template. In the future a new branch would be available for the guide version which would create a full-stack application - an inventory management application using axum on the backend of course, leptos on the frontend, and everything else in betweeen described under the "About" section of this repo.
+
+Check `/docs/from-scratch.md` for details on how to create this project from scratch.
+
+This project would piggyback on an already existing project, 'realworld-axum-sqlx'. You can find the project here: https://github.com/davidpdrsn/realworld-axum-sqlx/
+
+---
+
 ### Instructions to Run
 
 #### Prerequisites

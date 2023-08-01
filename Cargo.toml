@@ -3,5 +3,5 @@ members = [
     "axum_postgres_docker",
 ]
 exclude = [
-    "steps"
+    "docs"
 ]
