@@ -6,7 +6,7 @@
 [workspace]
 members = [
     "axum_postgres_docker",
-    "letpos_frontend"
+    "leptos_frontend"
 ]
 exclude = [
     "steps"
@@ -24,12 +24,12 @@ exclude = [
 ```.env
 POSTGRES_USR=postgres
 POSTGRES_PWD=a-password
-POSTGRES_DB=appdb
+POSTGRES_DB=app-db
 
 # This DATABASE_URL does not work inside docker, but should always work on your dev-machine, provided that pgadmin does not get in the way of host 'localhost'
 #DATABASE_URL=postgres://postgres:a-password@localhost/postgres
 
-DATABASE_URL=postgres://${POSTGRES_USR}:${POSTGRES_PWD}@host.docker.internal:5432/${POSTGRES_DB}
+DATABASE_URL=postgres://${POSTGRES_USR}:${POSTGRES_PWD}@app-db:5432/${POSTGRES_DB}
 ```
 
 - Dependency installations before adding source-code:
