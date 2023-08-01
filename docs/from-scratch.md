@@ -45,12 +45,19 @@ DATABASE_URL=postgres://${POSTGRES_USR}:${POSTGRES_PWD}@app-db:5432/${POSTGRES_D
 7. Dependency installations before adding source-code:
 
 `cargo add axum`
+
 `cargo add tokio -F "full"`
+
 `cargo add sqlx -F "postgres" -F "runtime-tokio-rustls"`
+
 `cargo add serde -F "derive"`
+
 `cargo add tracing`
+
 `cargo add tracing-subsriber`
+
 `cargo add dotenv`
+
 `cargo add anyhow`
 
 <pre>N.B: At this point you want to make sure you already have sqlx-cli</pre>
