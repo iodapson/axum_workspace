@@ -1,12 +1,12 @@
-#### You may start here
+#### Start from scratch here
 
 You may follow these steps:
 
-- 1. Create a Rust project, preferably a workspace, and cd into it.
+1. Create a Rust project, preferably a workspace, and cd into it.
 
 `mkdir axum_workspace` and `cd axum_workspace`
 
-- 2. Create a workspace by first creating a Cargo.toml file with the following similar content:
+2. Create a workspace by first creating a Cargo.toml file with the following similar content:
 
 ```toml
 [workspace]
@@ -19,17 +19,17 @@ exclude = [
 ]
 ```
 
-- 3. Create the first member crate called `axum_postgres_docker`.
+3. Create the first member crate named as `axum_postgres_docker`.
 
 ```
-cargo new axum_postgres_docker
+cargo new --bin axum_postgres_docker
 ```
 
-- 4. Create a migrations directory inside `axum_postgres_docker` and add its initial boilerplate file (SQL code for your code logic) if available.
+4. Create a migrations directory inside `axum_postgres_docker` and add its initial boilerplate file (SQL code for your code logic) if available.
 
-- 5. Create a '.env' file inside member crate `axum_workspace`'s root directory.
+5. Create a '.env' file inside member crate `axum_workspace`'s root directory.
 
-- 6. Create your database credentials inside `.env`. You can use the following as a starter template:
+6. Create your database credentials inside `.env`. You can use the following as a starter template:
 
 ```.env
 POSTGRES_USR=postgres
@@ -42,7 +42,7 @@ POSTGRES_DB=app-db
 DATABASE_URL=postgres://${POSTGRES_USR}:${POSTGRES_PWD}@app-db:5432/${POSTGRES_DB}
 ```
 
-- 7. Dependency installations before adding source-code:
+7. Dependency installations before adding source-code:
 
 `cargo add axum`
 `cargo add tokio -F "full"`
@@ -53,10 +53,10 @@ DATABASE_URL=postgres://${POSTGRES_USR}:${POSTGRES_PWD}@app-db:5432/${POSTGRES_D
 `cargo add dotenv`
 `cargo add anyhow`
 
-- N.B: At this point you want to make sure you already have sqlx-cli:
+<pre>N.B: At this point you want to make sure you already have sqlx-cli</pre>
 
 `cargo install sqlx-cli`
 
-- 8. Apply the code inside member crate `axum_postgres_docker` of inside this workspace repo.
+8. Apply the code inside member crate `axum_postgres_docker` of inside this workspace repo.
 
-- 9. Run `cargo build`. Refer back to the repo's README.md for instructions on how to build a docker image for the project, and spin-up docker containers.
+9. Run `cargo build`. Refer back to the repo's README.md for instructions on how to build a docker image for the project, and spin-up docker containers.
