@@ -14,17 +14,18 @@ This project would piggyback on an already existing project, 'realworld-axum-sql
 
 - You must have Docker engine running on your Linux, or Mac OS machine. If you use Windows, make sure to install Docker Desktop.
 
-- Download or clone this project. You may even fork it. It is runnable.
+- Download or clone this project.
 
 ---
 
-<pre>First time running this project? Here are the action steps to follow:</pre>
+First time running this project? Here are the action steps to follow:
 
 #### Step 1
 
-Upon cloning or downloading this project.
+It is assumed that you have cloned or downloaded this project and is opened locally on your machine.
 
 Make sure your inside directory `axum_workspace/axum_postgres_docker`, and copy the contents of `.env.sample` into a `.env` file using command:
+Make sure you are inside directory `axum_workspace/axum_postgres_docker`, and copy the contents of `.env.sample` into a `.env` file using command:
 
 ```
 cp ./.env.sample ./.env
