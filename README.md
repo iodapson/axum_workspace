@@ -24,7 +24,7 @@ This project would piggyback on an already existing project, 'realworld-axum-sql
 
 Upon cloning or downloading this project.
 
-Make sure your inside directory `axum_workspace/axum_postgres_docker`, and copy the contents of `.envsample` into a `.env` file using command:
+Make sure your inside directory `axum_workspace/axum_postgres_docker`, and copy the contents of `.env.sample` into a `.env` file using command:
 
 ```
 cp ./.env.sample ./.env
@@ -41,7 +41,7 @@ docker build -t axum_postgres_docker:1.0 .
 <pre>NOTE:</pre> If you are using a custom image name, your docker image build command would look like this:
 
 ```
-docker build -t <your-custom-docker-image-name-and-tag-here>
+docker build -t <your-custom-docker-image-name-and-tag-here> .
 ```
 
 #### Step 3.

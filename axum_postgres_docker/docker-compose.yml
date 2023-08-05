@@ -10,7 +10,7 @@ services:
       - POSTGRES_USER=${POSTGRES_USR}
       - POSTGRES_DB=${POSTGRES_DB}
     ports:
-      - 5432:5432
+      - ${DB_PORT}
     volumes:
       - db-data:/var/lib/postgresql/data
     healthcheck:
@@ -23,9 +23,8 @@ services:
     #build: .
     image: axum_postgres_docker:1.0
     env_file: .env
-    # The container port must match the exposed port (8090) in 'Dockerfile', but you can use any other browser port e.g, 8070:8090, 8080:8090, e.t.c.
     ports:
-      - 8090:8090
+      - ${AXUM_SERVER_PORT}
     depends_on:
       app-db:
         condition: service_healthy

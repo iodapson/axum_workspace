@@ -33,7 +33,7 @@ COPY build.rs /usr/src/axum_postgres_docker
 ## Touch mainlrs to prevent cached release build
 RUN touch /usr/src/axum_postgres_docker/src/main.rs
 
-# Tthis is the actual application build.
+# This is the actual application build.
 RUN cargo build --target x86_64-unknown-linux-musl --release
 
 ################
