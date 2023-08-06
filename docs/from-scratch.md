@@ -6,7 +6,7 @@ You may follow these steps:
 
 `mkdir axum_workspace` and `cd axum_workspace`
 
-2. Create a workspace by first creating a Cargo.toml file with the following similar content:
+2. Create a workspace by first creating a `Cargo.toml` file inside the just created `axum_workspace` directory, and provide the following workspace specification content:
 
 ```toml
 [workspace]
@@ -19,15 +19,17 @@ exclude = [
 ]
 ```
 
-3. Create the first member crate named as `axum_postgres_docker`.
+3. Create the first member crate inside `axum_workspace` named as `axum_postgres_docker`:
 
 ```
 cargo new --bin axum_postgres_docker
 ```
 
-4. Create a migrations directory inside `axum_postgres_docker` and add its initial boilerplate file (SQL code for your code logic) if available.
+Also change your current directory in your terminal to `axum_postgres_docker` using command `cd axum_postgres_docker`
 
-5. Create a '.env' file inside member crate `axum_workspace`'s root directory.
+4. Create a migrations directory inside `axum_postgres_docker`, and add its initial boilerplate file (SQL code for your code logic) if available.
+
+5. Create a '.env' file inside member crate `axum_postgres_docker`'s root directory.
 
 6. Create your database credentials inside `.env`. You can use the following as a starter template:
 
@@ -68,7 +70,7 @@ cargo add tracing
 ```
 
 ```
-cargo add tracing-subsriber
+cargo add tracing-subscriber
 ```
 
 ```
