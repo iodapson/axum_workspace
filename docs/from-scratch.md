@@ -47,7 +47,7 @@ DATABASE_URL=postgres://${POSTGRES_USR}:${POSTGRES_PWD}@${DB_PORT}:5432/${POSTGR
 AXUM_SERVER_PORT=8090:8090
 ```
 
-7. Dependency installations before adding source-code:
+7. Add crate dependencies before adding creating source-code:
 
 ```
 cargo add axum

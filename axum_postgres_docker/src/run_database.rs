@@ -3,7 +3,6 @@ use anyhow::{Context, Result};
 use sqlx::{postgres::PgPoolOptions, Pool, Postgres};
 
 pub async fn run_database(database_url: &String) -> Result<Pool<Postgres>> {
-    //let config = Config::new();
     // create a PgPoolOptions connection to DATABASE_URL
     let db_pool_options = PgPoolOptions::new()
         .max_connections(50)
