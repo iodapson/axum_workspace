@@ -1,5 +1,5 @@
 mod add_new_expense;
-mod root_path_get;
+mod root_path;
 
 use crate::config::Config;
 
@@ -8,7 +8,7 @@ use axum::{
     routing::{get, post},
     Router,
 };
-use root_path_get::get_root_path;
+use root_path::get_root_path;
 use sqlx::PgPool; // Newly added!
                   //use sqlx::{Pool, Postgres};
 use std::sync::Arc;

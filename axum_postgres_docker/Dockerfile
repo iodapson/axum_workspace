@@ -6,14 +6,14 @@ WORKDIR /usr/src
 RUN USER=root cargo new axum_postgres_docker
 
 # We want dependencies cached, so copy those (Cargo.toml, Cargo.lock) first
-## !!! PLEASE NOTE: I removed Cargo.lock copy because this particular project is a workspace member without its own 'Cargo.lock' !!!
+## !!! PLEASE NOTE: I did not copy 'Cargo.lock' because this particular project is a workspace member without its own 'Cargo.lock'
 COPY Cargo.toml /usr/src/axum_postgres_docker/
 
 # Set the working directory
 WORKDIR /usr/src/axum_postgres_docker
 
 # Install 'musl-tools' to enable successful image build
-RUN apt-get -y update
+RUN apt-get -y update 
 RUN apt-get -y upgrade
 RUN apt-get -y install musl-tools
 
