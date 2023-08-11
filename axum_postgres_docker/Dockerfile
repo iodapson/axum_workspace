@@ -30,7 +30,7 @@ COPY src /usr/src/axum_postgres_docker/src/
 COPY migrations /usr/src/axum_postgres_docker/migrations
 COPY build.rs /usr/src/axum_postgres_docker
 
-## Touch mainlrs to prevent cached release build
+## Touch main.rs to prevent cached release build
 RUN touch /usr/src/axum_postgres_docker/src/main.rs
 
 # This is the actual application build.
