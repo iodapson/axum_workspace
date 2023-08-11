@@ -2,9 +2,9 @@ name: Rust
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "scratch-pad" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "scratch-pad" ]
 
 env:
   CARGO_TERM_COLOR: always
