@@ -1,10 +1,10 @@
 ## Intoduction And Description
 
-You are inside the <pre>template</pre> branch of this project <pre>axum_workspace</pre> repo. This branch is the template version of this project. It has bare-bones setup for an axum web api comprising of a single postgres container, and a single containerized axum web-api. The axum api itself does no more than provide configurations to connect to the database, and run at an exposed port 8090 with a single `root_path`.
+You are inside the `template` branch of thisrepo - `axum_workspace`. This branch is the template version of this repo. It has bare-bone setup for an axum web api comprising of a single postgres container, and a single containerized axum web-api. The axum api itself does no more than provide configurations to connect to the database, and then run at an exposed port - 8090 with a single `get_root_path` route, and run a starter migration `0001_setup.sql`.
 
 Check `/docs/template.md` for a detailed code-walkthrough for how to recreate this project from scratch.
 
-If you want a rather full-stack guide/application-demo, a new branch `axum-leptos-demo` would be soon to soothe that curiosity.
+If you are interested in a rather full-stack guide/application-demo, a new branch `axum-leptos-demo` would soon be created to soothe that curiosity.
 
 This repo takes inspiration from another repo, the Realworld-axum-sqlx, in order to closely follow realworld Rust web-api conventions. The <pre>realworld-axum-sqlx</pre> repo version that this repo follows is hosted at: https://github.com/davidpdrsn/realworld-axum-sqlx/
 
