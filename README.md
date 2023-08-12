@@ -1,10 +1,12 @@
-## Brief Description
+## Intoduction And Description
 
-This project can be used both as template, and also be a guide. So far so good though, it is currently only available as a template. In the future a new branch would be available for the guide version which would create a full-stack application - an inventory management application using axum on the backend of course, leptos on the frontend, and everything else in betweeen described under the "About" section of this repo.
+You are inside the <pre>template</pre> branch of this project <pre>axum_workspace</pre> repo. This branch is the template version of this project. It has bare-bones setup for an axum web api comprising of a single postgres container, and a single containerized axum web-api. The axum api itself does no more than provide configurations to connect to the database, and run at an exposed port 8090 with a single `root_path`.
 
-Check `/docs/template.md` for details on how to create this project from scratch.
+Check `/docs/template.md` for a detailed code-walkthrough for how to recreate this project from scratch.
 
-This project would piggyback on an already existing project, 'realworld-axum-sqlx'. You can find the project here: https://github.com/davidpdrsn/realworld-axum-sqlx/
+If you want a rather full-stack guide/application-demo, a new branch `axum-leptos-demo` would be soon to soothe that curiosity.
+
+This repo takes inspiration from another repo, the Realworld-axum-sqlx, in order to closely follow realworld Rust web-api conventions. The <pre>realworld-axum-sqlx</pre> repo version that this repo follows is hosted at: https://github.com/davidpdrsn/realworld-axum-sqlx/
 
 ---
 
