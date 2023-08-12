@@ -83,6 +83,14 @@ create collation case_insensitive (provider = icu, locale = 'und-u-ks-level2', d
 
 Please note that the above `SQL` setup code was grabbed from the `Realworld-axum-sqlx` project found here - https://github.com/launchbadge/realworld-axum-sqlx/
 
+<pre>IMPORTANT: Make sure you have the sqlx-cli installed on your local development machine</pre>
+
+To install sqlx-cli with postgres feature:
+
+```sh
+cargo install sqlx-cli --features postgres
+```
+
 5. Generate a build script. Make sure you generate the build script inside member `axum_postgres_docker` root-dir level. The command to use is:
 
 ```shell
