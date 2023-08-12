@@ -1,10 +1,12 @@
 ## Brief Description
 
-This project can be used both as template, and also be a guide. So far so good though, it is currently only available as a template. In the future a new branch would be available for the guide version which would create a full-stack application - an inventory management application using axum on the backend of course, leptos on the frontend, and everything else in betweeen described under the "About" section of this repo.
+You are inside the `scratch-pad` branch of this repo - `axum_workspace`. This branch is just aspace to experiment with a mix ideas that would be appropriately filtered and refined into appropriate other branches inside this repo.
 
-Check `/docs/from-scratch.md` for details on how to create this project from scratch.
+Check `/docs/from-scratch.md` for a detailed code-walkthrough of how to get up to speed with the creation of this project (branch `scratch-pad` version of it).
 
 This project would piggyback on an already existing project, 'realworld-axum-sqlx'. You can find the project here: https://github.com/davidpdrsn/realworld-axum-sqlx/
+
+<pre>If you are looking for a bare-bone template version, one that simply creates a dockerized axum web-api with a Postgres docker container, and contains code to start creating route immediately, then check out the `template` branch of this project-repo.</pre>
 
 ---
 
