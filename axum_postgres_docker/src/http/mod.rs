@@ -26,9 +26,7 @@ pub fn build_routes(config: Config, db: PgPool) -> Router {
         db,
     };
 
-    let app = api_router(api_context);
-
-    app
+    api_router(api_context)
 }
 
 fn api_router(api_context: ApiContext) -> Router {
