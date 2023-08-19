@@ -1,6 +1,6 @@
 ## Introduction And Description
 
-You are inside branch `template`, the default branch of this repo - `experimental`. This branch is the template version of this repo. It has a bare-bone setup for an axum web api comprising of a single postgres container, and a single containerized axum web-api. The axum api itself (`axum_postgres_docker`) does no more than provide configurations to connect to the database, and then run at an exposed port - 8090 with a single `get_root_path` route for an HTTP-GET request to path `/`, as in, `http://localhost:8090`. It also includes a starter migration named - `0001_setup.sql` inside `axum_postgres_docker/migrations`.
+You are inside branch `template`, the default branch of this repo - `axum_workspace`. This branch is the template version of this repo. It has a bare-bone setup for an axum web api comprising of a single postgres container, and a single containerized axum web-api. The axum api itself (`axum_postgres_docker`) does no more than provide configurations to connect to the database, and then run at an exposed port - 8090 with a single `get_root_path` route for an HTTP-GET request to path `/`, as in, `http://localhost:8090`. It also includes a starter migration named - `0001_setup.sql` inside `axum_postgres_docker/migrations`.
 
 Check `axum_workspace/docs/template.md` for a detailed code-walkthrough of how to recreate this project (this very branch - `template` version of it) from scratch.
 
