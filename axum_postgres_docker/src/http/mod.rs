@@ -4,8 +4,7 @@ use crate::config::Config;
 
 use axum::{routing::get, Router};
 use root_path::get_root_path;
-use sqlx::PgPool; // Newly added!
-                  //use sqlx::{Pool, Postgres};
+use sqlx::PgPool;
 use std::sync::Arc;
 
 #[allow(unused)]

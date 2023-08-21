@@ -1,4 +1,3 @@
-//use crate::config::Config;
 use anyhow::{Context, Result};
 use sqlx::{postgres::PgPoolOptions, Pool, Postgres};
 

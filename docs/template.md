@@ -91,7 +91,7 @@ To install sqlx-cli with postgres feature:
 cargo install sqlx-cli --features postgres
 ```
 
-5. Generate a build script. Make sure you generate the build script inside member `axum_postgres_docker` root-dir level. The command to use is:
+5. Generate a build script inside member crate `axum_postgres_docker` root-dir level. The command to use is:
 
 ```shell
 sqlx migrate build-script
@@ -100,7 +100,7 @@ sqlx migrate build-script
 N.B:
 Make sure to push the resulting `build.rs` file to source-control.
 
-5. Create a `.env` file inside member crate `axum_postgres_docker`'s root directory. You may use the following credentials as a starter template:
+5. Create a `.env` file inside member crate `axum_postgres_docker`'s root directory which would contain credentials for your app, such as your database url and server port address which would is accessed and used inside your `docker-compose.yml`
 
 ```.env
 POSTGRES_USR=postgres
@@ -111,9 +111,17 @@ DB_PORT=5432:5432
 # This DATABASE_URL does not work inside docker, but should always work on your dev-machine, provided that pgadmin does not get in the way of host 'localhost'
 #DATABASE_URL=postgres://postgres:a-password@localhost/postgres
 
-DATABASE_URL=postgres://${POSTGRES_USR}:${POSTGRES_PWD}@${DB_PORT}:5432/${POSTGRES_DB}
+DATABASE_URL=postgres://${POSTGRES_USR}:${POSTGRES_PWD}@app-db:5432/${POSTGRES_DB}
 
 AXUM_SERVER_PORT=8090:8090
+
+HMAC_KEY=a-random-key
+```
+
+Alternatively, you can utilize the `.env.sample` file that accompany this project inside directory `axum_postgres_docker`, using command:
+
+```sh
+cp ./.env.sample ./.env
 ```
 
 6. Add crate dependencies before creating source-code:
@@ -139,7 +147,7 @@ cargo add tracing
 ```
 
 ```
-cargo add tracing-subsriber
+cargo add tracing-subscriber
 ```
 
 ```
@@ -150,10 +158,10 @@ cargo add dotenv
 cargo add anyhow
 ```
 
-<pre>N.B: At this point you want to make sure you already have sqlx-cli</pre>
+<pre>N.B: At this point you want to make sure you already have sqlx-cli. Here is a reminder of what of the command to use to install the sqlx-cli: </pre>
 
 ```
-cargo install sqlx-cli
+cargo install sqlx-cli --features postgres
 ```
 
 7. Apply (write/copy) the code inside member crate `axum_postgres_docker` of this workspace repo. Here is the general gist of member crate `axum_postgres_docker`'s code:
@@ -233,7 +241,7 @@ Inside function `run_database()`, `db_pool_options` allows up to 50 max async co
 use anyhow::{Context, Result};
 use sqlx::{postgres::PgPoolOptions, Pool, Postgres};
 
-pub async fn run_database(database_url: &String) -> Result<Pool<Postgres>> {
+pub async fn run_database(database_url: &str) -> Result<Pool<Postgres>> {
     // create a PgPoolOptions connection to DATABASE_URL
     let db_pool_options = PgPoolOptions::new()
         .max_connections(50)
@@ -261,19 +269,13 @@ Function `api_router()` uses its single `ApiContext` instance argument to create
 
 ```rs
 // src/http/mod.rs
-mod add_new_expense;
 mod root_path;
 
 use crate::config::Config;
 
-use add_new_expense::add_new_expense;
-use axum::{
-    routing::{get, post},
-    Router,
-};
+use axum::{routing::get, Router};
 use root_path::get_root_path;
-use sqlx::PgPool; // Newly added!
-                  //use sqlx::{Pool, Postgres};
+use sqlx::PgPool;
 use std::sync::Arc;
 
 #[allow(unused)]
@@ -289,15 +291,13 @@ pub fn build_routes(config: Config, db: PgPool) -> Router {
         db,
     };
 
-    let app = api_router(api_context);
-
-    app
+    api_router(api_context)
 }
 
 fn api_router(api_context: ApiContext) -> Router {
     Router::new()
         .route("/", get(get_root_path))
-        .route("/create-new-expense", post(add_new_expense))
+        // add as much route handlers as you need
         .with_state(api_context)
 }
 ```
@@ -318,8 +318,6 @@ use http::build_routes;
 use run_database::run_database;
 use std::error::Error; // not strictly required here since anyhow is utilized.
 use std::net::SocketAddr;
-use tracing;
-use tracing_subscriber;
 
 pub async fn start_app() -> Result<()> {
     // initialize tracing
@@ -378,7 +376,7 @@ pub async fn get_root_path() -> Html<String> {
 
 <h6>The remaining non-Rust files that this project requires you to create at the bearest minimum are: </h6>
 
-- <pre>Dockerfile</pre>
+- <pre>axum_postgres_docker/Dockerfile</pre>
 
 `Dockerfile` - Contains instructions for the Docker engine to use and create a new custom docker image for the Rust `axum` API.
 
@@ -472,32 +470,6 @@ services:
 
 volumes:
   db-data: {}
-```
-
-- <pre>axum_postgres_docker/.env</pre>
-
-dd a `.env` file which would contain credentials for your app, such as your database url and server port address which should be used inside your `docker-compose.yml`
-
-```.env
-POSTGRES_USR=postgres
-POSTGRES_PWD=a-password
-POSTGRES_DB=app-db
-DB_PORT=5432:5432
-
-# This DATABASE_URL does not work inside docker, but should always work on your dev-machine, provided that pgadmin does not get in the way of host 'localhost'
-#DATABASE_URL=postgres://postgres:a-password@localhost/postgres
-
-DATABASE_URL=postgres://${POSTGRES_USR}:${POSTGRES_PWD}@app-db:5432/${POSTGRES_DB}
-
-AXUM_SERVER_PORT=8090:8090
-
-HMAC_KEY=a-random-key
-```
-
-Alternatively, you can utilize the `.env.sample` file that accompany this project inside directory `axum_postgres_docker`, using command:
-
-```sh
-cp ./.env.sample ./.env
 ```
 
 - Now is the time to init your project as a Git repo at the root level of the workspace, so that Git can capture `axum_postgres_docker` and your frontend member crate e.g, `leptos_frontend_docker`.

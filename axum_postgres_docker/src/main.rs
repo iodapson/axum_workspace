@@ -8,8 +8,6 @@ use http::build_routes;
 use run_database::run_database;
 use std::error::Error; // not strictly required here since anyhow is utilized.
 use std::net::SocketAddr;
-//use tracing;
-//use tracing_subscriber;
 
 pub async fn start_app() -> Result<()> {
     // initialize tracing
