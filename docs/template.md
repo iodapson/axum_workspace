@@ -18,7 +18,15 @@ exclude = [
 ]
 ```
 
-3. Create the first member crate inside `axum_workspace` named as `axum_postgres_docker`:
+3. Now is the time to init your project as a Git repo at the root level of the workspace, so that Git can capture `axum_postgres_docker` and perhaps your future front-end member crate e.g, `leptos_frontend_docker`.
+
+Inside `axum_workspace`:
+
+```sh
+git init
+```
+
+4. Create the first member crate inside `axum_workspace` named as `axum_postgres_docker`:
 
 ```
 cargo new --bin axum_postgres_docker
@@ -26,7 +34,7 @@ cargo new --bin axum_postgres_docker
 
 Also change directory into `axum_postgres_docker` using command `cd axum_postgres_docker`.
 
-4. Create a migrations directory inside `axum_postgres_docker` and add its initial boilerplate file (SQL code for your code logic) if available. Feel free to use the following setup SQL code as your first migration:
+5. Create a migrations directory inside `axum_postgres_docker` and add its initial boilerplate file (SQL code for your code logic) if available. Feel free to use the following setup SQL code as your first migration:
 
 ```sql
 -- This is a boilerplate migration file that we use in nearly every project.
@@ -91,7 +99,7 @@ To install sqlx-cli with postgres feature:
 cargo install sqlx-cli --features postgres
 ```
 
-5. Generate a build script inside member crate `axum_postgres_docker` root-dir level. The command to use is:
+6. Generate a build script inside member crate `axum_postgres_docker` root-dir level. The command to use is:
 
 ```shell
 sqlx migrate build-script
@@ -100,7 +108,7 @@ sqlx migrate build-script
 N.B:
 Make sure to push the resulting `build.rs` file to source-control.
 
-5. Create a `.env` file inside member crate `axum_postgres_docker`'s root directory which would contain credentials for your app, such as your database url and server port address which would is accessed and used inside your `docker-compose.yml`
+7. Create a `.env` file inside member crate `axum_postgres_docker`'s root directory which would contain credentials for your app, such as your database url and server port address which would is accessed and used inside your `docker-compose.yml`
 
 ```.env
 POSTGRES_USR=postgres
@@ -124,7 +132,7 @@ Alternatively, you can utilize the `.env.sample` file that accompany this projec
 cp ./.env.sample ./.env
 ```
 
-6. Add crate dependencies before creating source-code:
+8. Add crate dependencies before creating source-code:
 
 ```
 cargo add axum
@@ -164,7 +172,7 @@ cargo add anyhow
 cargo install sqlx-cli --features postgres
 ```
 
-7. Apply (write/copy) the code inside member crate `axum_postgres_docker` of this workspace repo. Here is the general gist of member crate `axum_postgres_docker`'s code:
+9. Apply (write/copy) the code inside member crate `axum_postgres_docker` of this workspace repo. Here is the general gist of member crate `axum_postgres_docker`'s code:
 
 `Code structure`:
 
@@ -187,7 +195,7 @@ axum_postgres_docker
   |- Dockerfile
 </pre>
 
-And the project's code execution flow looks like this:
+And the project's source-code execution flow looks like this:
 
 <pre>
          ___ <code>config.rs</code>
@@ -434,7 +442,7 @@ CMD ["/usr/local/bin/axum_postgres_docker"]
 
 - <pre>axum_postgres_docker/docker-compose.yml</pre>
 
-`docker-compose.yml` - Contains instructions for the Docker engine to create a Postgres container, and another container based off a Docker image built atop the Rust `axum` API.
+`docker-compose.yml` - Contains instructions for the Docker engine to create a Postgres container, and another container based off a Docker image built based-off the Rust `Axum` API.
 
 ```yaml
 version: '3.9'
@@ -472,17 +480,9 @@ volumes:
   db-data: {}
 ```
 
-- Now is the time to init your project as a Git repo at the root level of the workspace, so that Git can capture `axum_postgres_docker` and your frontend member crate e.g, `leptos_frontend_docker`.
+Since you have now initialized the entire workspace as a Git repo, you can make sure to have a `.gitignore` file, and perhaps a `README.md` file. This template guide would not provide any `README.md` content as it leaves it up to you to decide the decription of your own custom project moving forward. Below is a provided template `.gitignore` file for this project.
 
-Inside `axum_workspace`:
-
-```sh
-git init
-```
-
-Since you have now initialized the entire workspace as a Git repo, you can make sure to have a `.gitignore` file, and perhaps a `README.md` file. This template guide would not provide any `README.md` content, it is up to you to decide the decription of your own custom project moving forward. Below is a template `.gitignore` file for this project.
-
-- <pre>axum_postgres_docker/.gitignore</pre>
+- <pre>axum_workspace/.gitignore</pre>
 
 `.gitignore` - Contains files and directories that should be ignored when you push your local Git repo (on your dev-machine) to a remote Git repo like https://GitHub.com
 
@@ -491,16 +491,16 @@ Since you have now initialized the entire workspace as a Git repo, you can make 
 /axum_postgres_docker/.env
 ```
 
-8. Generate a build script. Make sure you generate the build script inside member `axum_postgres_docker` root-dir level. The command to use is:
+10. Generate a build script. Make sure you generate the build script inside member `axum_postgres_docker` root-dir level. The command to use is:
 
 ```shell
 sqlx migrate build-script
 ```
 
 N.B:
-Make sure to push the resulting `build.rs` file to source-control.
+Make sure to push the resulting `build.rs` file to source-control, e.g, GitHub.
 
-9. Set up your database migrations using the `sqlx-cli` tool. If you add new migrations to (i.e, add new `.sql` files), re-setup your database migrations again using the `sqlx cli tool`. The command to set up migrations is -
+11. Set up your database migrations using the `sqlx-cli` tool. If you add new migrations to (i.e, add new `.sql` files), re-setup your database migrations again using the `sqlx cli tool`. The command to set up migrations is -
 
 ```sh
 sqlx db setup
@@ -512,4 +512,4 @@ OR
 sqlx database setup
 ```
 
-10. Run `cargo build`. Refer back to the repo's README.md for instructions on how to build a docker image for the project, and spin-up docker containers.
+12. Run `cargo build`. Refer back to the repo's README.md for instructions on how to build a docker image for the project, and spin-up docker containers.
