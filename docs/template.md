@@ -106,7 +106,7 @@ sqlx migrate build-script
 ```
 
 N.B:
-Make sure to push the resulting `build.rs` file to source-control.
+Make sure to push the resulting `build.rs` file to source-control, e.g, GitHub.
 
 7. Create a `.env` file inside member crate `axum_postgres_docker`'s root directory which would contain credentials for your app, such as your database url and server port address which would is accessed and used inside your `docker-compose.yml`
 
@@ -491,14 +491,36 @@ Since you have now initialized the entire workspace as a Git repo, you can make 
 /axum_postgres_docker/.env
 ```
 
-10. Generate a build script. Make sure you generate the build script inside member `axum_postgres_docker` root-dir level. The command to use is:
+10. Create a source-control workflow to run basic code checks that prevents code that can't run from being pushed to your project source-control repo. Here is a simple GitHub-provisioned workflow named 'rust.yml' created to do run basic code compilation checks:
 
-```shell
-sqlx migrate build-script
+- <pre>axum_workspace/.github/workflows/rust.yml</pre>
+
+```yml
+name: Rust
+
+on:
+  push:
+    branches: ['template']
+  pull_request:
+    branches: ['template']
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: cargo build --verbose
+      - name: Run tests
+        run: cargo test --verbose
 ```
 
 N.B:
-Make sure to push the resulting `build.rs` file to source-control, e.g, GitHub.
+Make sure to change the values of `on.push.branches`, and `on.pull_request.branches` from `template` to whatever custom branch name you prefer for your custom project, .e.g, branch main or deploy, whatever.
 
 11. Set up your database migrations using the `sqlx-cli` tool. If you add new migrations to (i.e, add new `.sql` files), re-setup your database migrations again using the `sqlx cli tool`. The command to set up migrations is -
 
@@ -513,3 +535,7 @@ sqlx database setup
 ```
 
 12. Run `cargo build`. Refer back to the repo's README.md for instructions on how to build a docker image for the project, and spin-up docker containers.
+
+AND
+
+If you created a new project from scratch, its time to `git add .`, `git commit -m <commit-message-here>`, and `git push` it to source-control.
