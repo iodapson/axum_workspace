@@ -522,7 +522,7 @@ jobs:
 N.B:
 Make sure to change the values of `on.push.branches`, and `on.pull_request.branches` from `template` to whatever custom branch name you prefer for your custom project, .e.g, branch main or deploy, whatever.
 
-11. Set up your database migrations using the `sqlx-cli` tool. If you add new migrations to (i.e, add new `.sql` files), re-setup your database migrations again using the `sqlx cli tool`. The command to set up migrations is -
+11. Set up your database migrations using the `sqlx-cli` tool. If you add new migrations to (i.e, add new `.sql` files), re-setup your database migrations again using the `sqlx cli tool`. The command to set up migrations from inside `axum_postgres_docker` is:
 
 ```sh
 sqlx db setup
@@ -534,7 +534,7 @@ OR
 sqlx database setup
 ```
 
-12. Run `cargo build`. Refer back to the repo's README.md for instructions on how to build a docker image for the project, and spin-up docker containers.
+12. Run `cargo build` from anywhere inside your `axum_workspace` Rust workspace. Refer back to the repo's README.md for instructions on how to build a docker image for the project, and spin-up docker containers.
 
 AND
 
