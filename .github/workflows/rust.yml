@@ -2,9 +2,9 @@ name: Rust
 
 on:
   push:
-    branches: [ "template" ]
+    branches: [ "axum-leptos" ]
   pull_request:
-    branches: [ "template" ]
+    branches: [ "axum-leptos" ]
 
 env:
   CARGO_TERM_COLOR: always

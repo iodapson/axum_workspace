@@ -1,101 +1,97 @@
-## Introduction And Description
+<h4>This is the start of a new web-app that aims to demo integrating Rust Axum backend with a Rust Leptos frontend, containerized and served on the Cloud on an Alkamai Cloud instance.</h4>
 
-You are inside branch `template`, the default branch of this repo - `axum_workspace`. This branch is the template version of this repo. It has a bare-bone setup for an axum web api comprising of a single postgres container, and a single containerized axum web-api. The axum api itself (`axum_postgres_docker`) does no more than provide configurations to connect to the database, and then run at an exposed port - 8090 with a single `get_root_path` route for an HTTP-GET request to path `/`, as in, `http://localhost:8090`. It also includes a starter migration named - `0001_setup.sql` inside `axum_postgres_docker/migrations`.
+<picture>
+    <source srcset="https://raw.githubusercontent.com/leptos-rs/leptos/main/docs/logos/Leptos_logo_Solid_White.svg" media="(prefers-color-scheme: dark)">
+    <img src="https://raw.githubusercontent.com/leptos-rs/leptos/main/docs/logos/Leptos_logo_RGB.svg" alt="Leptos Logo">
+</picture>
 
-Check `axum_workspace/docs/template.md` for a detailed code-walkthrough of how to recreate this project (this very branch - `template` version of it) from scratch.
+# Leptos Axum Starter Template
 
-If you are interested in a rather full-stack guide/application-demo, a new branch `axum-leptos-demo` would soon be created to soothe that curiosity.
+This is a template for use with the [Leptos](https://github.com/leptos-rs/leptos) web framework and the [cargo-leptos](https://github.com/akesson/cargo-leptos) tool using [Axum](https://github.com/tokio-rs/axum).
 
-This repo takes inspiration from another axum project repo - `realworld-axum-sqlx`, in order to closely follow realworld Rust web-api conventions. The `realworld-axum-sqlx` repo version that this repo follows is hosted at: https://github.com/davidpdrsn/realworld-axum-sqlx/
+## Creating your template repo
 
----
+If you don't have `cargo-leptos` installed you can install it with
 
-### Instructions to Run
-
-#### Prerequisites
-
-- You must have Docker engine running on your Linux, or Mac OS machine. If you use Windows, make sure to install Docker Desktop.
-
-- Download or clone this project.
-
----
-
-First time running this project? Here are the action steps to follow:
-
-#### Step 1
-
-It is assumed that you have cloned or downloaded this project and is opened locally on your machine.
-
-Make sure your inside directory `axum_workspace/axum_postgres_docker`, and copy the contents of `.env.sample` into a `.env` file using command:
-Make sure you are inside directory `axum_workspace/axum_postgres_docker`, and copy the contents of `.env.sample` into a `.env` file using command:
-
-```
-cp ./.env.sample ./.env
+```bash
+cargo install cargo-leptos
 ```
 
-#### Step 2.
+Then run
 
-Make sure you are inside directory `axum_workspace/axum_postgres_docker`, and build Docker image with any name, or you could use name and tag - `axum_postgres_docker:1.0`, using command:
-
-```
-docker build -t axum_postgres_docker:1.0 .
+```bash
+cargo leptos new --git https://github.com/Gentle/start-axum-workspace
 ```
 
-<pre>NOTE:</pre> If you are using a custom image name, your docker image build command would look like this:
+to generate a new project template.
 
-```
-docker build -t <your-custom-docker-image-name-and-tag-here> .
-```
-
-#### Step 3.
-
-Make sure you are inside directory `axum_workspace/axum_postgres_docker`, and then spin up docker containers specified inside `docker-compose.yml` by entering command:
-
-```
-docker-compose up
+```bash
+cd {projectname}
 ```
 
-OR
+to go to your newly created project.  
+Feel free to explore the project structure, but the best place to start with your application code is in `src/app.rs`.  
+Addtionally, Cargo.toml may need updating as new versions of the dependencies are released, especially if things are not working after a `cargo update`.
 
-```
-docker compose up
-```
+## Running your project
 
-#### Step 4.
-
-Open your choice browser, and launch the app using url: `localhost:8090`
-
-You should see a welcome page saying that "Welcome! This Rust Axum app is now Running at Port 8090"
-
----
-
-### Project Maintainance (Locally)
-
-Follow this section of this guide to rurun an updated app with code changes inside Docker.
-
-- Take down spun-up docker containers by running command `docker-compose down` OR `docker compose down` from inside directory `axum_workspace/axum_postgres_docker`.
-
-```
-docker compose down
+```bash
+cargo leptos watch
 ```
 
-- Remember to delete volumes when you make changes to the source code, especially when you add new migrations. Delete the docker volume for this project `axum_postgres_docker` using command:
+## Installing Additional Tools
 
-```
-docker volume rm axum_postgres_docker_db-data
-```
+By default, `cargo-leptos` uses `nightly` Rust, `cargo-generate`, and `sass`. If you run into any trouble, you may need to install one or more of these tools.
 
-- Remember to delete existing Docker image builds whenever you make changes to the source code and want to make a new image with the changes. Deleting the old image would make sure that your code changes reflect inside the new docker image build. To delete existing image `axum_postgres_docker:1.0` for example, enter command:
+1. `rustup toolchain install nightly --allow-downgrade` - make sure you have Rust nightly
+2. `rustup default nightly` - setup nightly as default, or you can use rust-toolchain file later on
+3. `rustup target add wasm32-unknown-unknown` - add the ability to compile Rust to WebAssembly
+4. `cargo install cargo-generate` - install `cargo-generate` binary (should be installed automatically in future)
+5. `npm install -g sass` - install `dart-sass` (should be optional in future
 
-```
-docker rmi axum_postgres_docker:1.0
-```
+## Compiling for Release
 
-OR
-
-```
-docker image rm axum_postgres_docker:1.0
+```bash
+cargo leptos build --release
 ```
 
-- Finally, after you have run commands `docker compose down`, `docker rmi axum_postgres_docker:1.0`, and `docker volume rm axum_postgres_docker_db-data` one at a time, you can now begin the image building and container spin up process again.
-  Refer back to `Step 2` and `Step 3` for a reference on how to build a new docker image, and spin up new Docker containers containers respectively.
+Will generate your server binary in target/server/release and your site package in target/site
+
+## Testing Your Project
+
+```bash
+cargo leptos end-to-end
+```
+
+```bash
+cargo leptos end-to-end --release
+```
+
+Cargo-leptos uses Playwright as the end-to-end test tool.  
+Tests are located in end2end/tests directory.
+
+## Executing a Server on a Remote Machine Without the Toolchain
+
+After running a `cargo leptos build --release` the minimum files needed are:
+
+1. The server binary located in `target/server/release`
+2. The `site` directory and all files within located in `target/site`
+
+Copy these files to your remote server. The directory structure should be:
+
+```text
+start-axum
+site/
+```
+
+Set the following enviornment variables (updating for your project as needed):
+
+```text
+LEPTOS_OUTPUT_NAME="start-axum"
+LEPTOS_SITE_ROOT="site"
+LEPTOS_SITE_PKG_DIR="pkg"
+LEPTOS_SITE_ADDR="127.0.0.1:3000"
+LEPTOS_RELOAD_PORT="3001"
+```
+
+Finally, run the server binary.
