@@ -1164,9 +1164,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_axum"
-version = "0.4.2"
+version = "0.4.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "577a13d941b8e6f8bf8ed134b11c5e1f2d7f58bfca4ce4b22db3e7b09deac84f"
+checksum = "309af4ea2fd7e9769f1f10d7e356fcb4e7d2bb1c21588dc73151feca415fd45a"
 dependencies = [
  "axum",
  "futures",
@@ -1325,9 +1325,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_router"
-version = "0.4.2"
+version = "0.4.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "61b5d6f6dcc342137e9f93d46096676e9061aa22ea97708284b17ccb9317a52b"
+checksum = "589f02384aaeff09ba17093305a0dfe8713fb171f7227a8543992a9ce44c75cd"
 dependencies = [
  "cached",
  "cfg-if",
@@ -1339,6 +1339,7 @@ dependencies = [
  "linear-map",
  "log",
  "lru",
+ "once_cell",
  "percent-encoding",
  "regex",
  "serde",
@@ -1540,9 +1541,9 @@ dependencies = [
 
 [[package]]
 name = "once_cell"
-version = "1.17.1"
+version = "1.18.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b7e5500299e16ebb147ae15a00a942af264cf3688f47923b8fc2cd5858f23ad3"
+checksum = "dd8b5dd2ae5ed71462c540258bedcb51965123ad7e7ccf4b9a8cafaa4a63576d"
 
 [[package]]
 name = "ordered-multimap"
