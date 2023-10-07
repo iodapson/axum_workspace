@@ -100,6 +100,8 @@ Note: At this stage, you might encounter a compilation error that looks similar 
 ```
 ...(head, tail) = html_parts_separated(options, use_context::<MetaC...
 | ^^^^^^^^^^^^^^^^^^^^ ------- an argument of type `leptos::Scope` is missing
+
+...)
 ```
 
 If you follow the link to the module causing the build error, you'll see the following faulty `html_parts_seperated()` function call in line `647` -
