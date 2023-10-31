@@ -392,4 +392,22 @@ volumes:
   db-data: {}
 ```
 
-18. Create a `.env` file to supply credentials needed by the Postgres container.
+18. Create a `.env` file to supply credentials needed by the Postgres container. You can make use of this `.env.sample`
+
+```.env
+POSTGRES_USR=postgres
+POSTGRES_PWD=a-password
+POSTGRES_DB=app-db
+DB_PORT=5432:5432
+
+# This DATABASE_URL does not work inside docker, but should always work on your dev-machine, provided that pgadmin does not get in the way of host 'localhost'
+#DATABASE_URL=postgres://postgres:a-password@localhost/postgres
+
+DATABASE_URL=postgres://${POSTGRES_USR}:${POSTGRES_PWD}@app-db:5432/${POSTGRES_DB}
+
+AXUM_SERVER_PORT=8070:8070
+
+HMAC_KEY=a-random-key
+```
+
+19. Now refer back to the README.md of this branch to find instructions to run this app.
