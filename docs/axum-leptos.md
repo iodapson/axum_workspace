@@ -353,3 +353,43 @@ EXPOSE 8070
 # Run the server ** changes included here
 CMD ["/app/server"]
 ```
+
+17. Create new `docker-compose.yml` file to spin up two containers, one for a Postgres database, and the other for the axum-leptos Docker image
+
+```yaml
+version: '3.9'
+
+services:
+  app-db:
+    image: postgres:latest
+    restart: always
+    env_file: .env
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PWD}
+      - POSTGRES_USER=${POSTGRES_USR}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - ${DB_PORT}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: psql -U postgres -q -d postgres -c "SELECT 'ready';"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+  axum_leptos:
+    #build: .
+    image: axum_leptos_docker:1.0
+    env_file: .env
+    ports:
+      - ${AXUM_SERVER_PORT}
+    depends_on:
+      app-db:
+        condition: service_healthy
+
+volumes:
+  db-data: {}
+```
+
+18. Create a `.env` file to supply credentials needed by the Postgres container.
