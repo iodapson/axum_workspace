@@ -1,4 +1,4 @@
-<h4>This is the start of a new web-app that aims to demo integrating Rust Axum backend with a Rust Leptos frontend, containerized and served on the Cloud on an Alkamai Cloud instance.</h4>
+<h4>Welcome!</h4>
 
 <picture>
     <source srcset="https://raw.githubusercontent.com/leptos-rs/leptos/main/docs/logos/Leptos_logo_Solid_White.svg" media="(prefers-color-scheme: dark)">
@@ -7,49 +7,112 @@
 
 # Leptos Axum Starter Template
 
-This is a template for use with the [Leptos](https://github.com/leptos-rs/leptos) web framework and the [cargo-leptos](https://github.com/akesson/cargo-leptos) tool using [Axum](https://github.com/tokio-rs/axum).
+This is an extension template for use with the [Leptos](https://github.com/leptos-rs/leptos) web framework and the [cargo-leptos](https://github.com/akesson/cargo-leptos) tool using [Axum](https://github.com/tokio-rs/axum).
 
-## Creating your template repo
+---
 
-If you don't have `cargo-leptos` installed you can install it with
+## Introduction And Description
 
-```bash
-cargo install cargo-leptos
+This is the start of a new web-app that aims to demo integrating Rust Axum backend with a Rust Leptos frontend, containerized and served on the Cloud on an Alkamai Cloud instance.
+
+Check `axum_workspace/docs/axum-leptos.md` for a detailed code-walkthrough of how to recreate this the code in this branch from scratch.
+
+This repo builds atop an official template - `start-axum-workspace` provided by the Leptos team. You can take a close look at the official `start-axum-workspace` template here: https://github.com/leptos-rs/start-axum-workspace
+
+---
+
+#### Prerequisites
+
+- You must have Docker engine running on your Linux, or Mac OS machine. If you use Windows, make sure to install Docker Desktop.
+
+- You must have this project cloned or downloaded, and opened on your local machine.
+
+_If you would like to build it from scratch and see what you'd like to customize, check the `docs/axum-leptos.md` inside `axum_workspace` directory of Git branch `axum-leptos` for this repo_
+
+### Instructions to Run
+
+---
+
+First time running this project? Here are the action steps to follow:
+
+#### Step 1.
+
+Make sure you are inside directory `axum_workspace/`, and build Docker image with any name, or you could use name and tag - `axum_leptos_docker:1.0`, using command:
+
+```
+docker build -t axum_leptos_docker:1.0 .
 ```
 
-Then run
+<pre>NOTE:</pre> If you are using a custom image name, your docker image build command would look like this:
 
-```bash
-cargo leptos new --git https://github.com/Gentle/start-axum-workspace
+```
+docker build -t <your-custom-docker-image-name-and-tag-here> .
 ```
 
-to generate a new project template.
+#### Step 2.
 
-```bash
-cd {projectname}
+Make sure you are inside directory `axum_workspace`, and then spin up docker containers specified inside `docker-compose.yml` by entering command:
+
+```
+docker-compose up
 ```
 
-to go to your newly created project.  
-Feel free to explore the project structure, but the best place to start with your application code is in `src/app.rs`.  
-Addtionally, Cargo.toml may need updating as new versions of the dependencies are released, especially if things are not working after a `cargo update`.
+OR
 
-## Running your project
+```
+docker compose up
+```
+
+#### Step 3.
+
+Open your choice browser, and launch the app using url: `localhost:8070`
+
+You should see a welcome page saying that "Welcome! This Rust Axum app is now Running at Port 8070"
+
+---
+
+### Project Maintainance (Locally)
+
+Follow this section of this guide to rurun an updated app with code changes inside Docker.
+
+- Take down spun-up docker containers by running command `docker-compose down` OR `docker compose down` from inside directory `axum_workspace`.
+
+```
+docker compose down
+```
+
+- Remember to delete volumes when you make changes to the source code, especially when you add new migrations. Delete the docker volume for this project `axum_leptos_docker` using command:
+
+```
+docker volume rm axum_leptos_docker_db-data
+```
+
+- Remember to delete existing Docker image builds whenever you make changes to the source code and want to make a new image with the changes. Deleting the old image would make sure that your code changes reflect inside the new docker image build. To delete existing image `axum_leptos_docker:1.0` for example, enter command:
+
+```
+docker rmi axum_leptos_docker:1.0
+```
+
+OR
+
+```
+docker image rm axum_leptos_docker:1.0
+```
+
+- Finally, after you have run commands `docker compose down`, `docker rmi axum_leptos/_docker:1.0`, and `docker volume rm axum_leptos_docker_db-data` one at a time, you can now begin the Docker image building and container spin up process again.
+  Refer back to `Step 1` and `Step 2` for a reference on how to build a new docker image, and spin up new Docker containers containers respectively.
+
+_N.B: Cargo.toml may need updating as new versions of the dependencies are released, especially if things are not working after a `cargo update`._
+
+---
+
+### Running your project (without Docker)
 
 ```bash
 cargo leptos watch
 ```
 
-## Installing Additional Tools
-
-By default, `cargo-leptos` uses `nightly` Rust, `cargo-generate`, and `sass`. If you run into any trouble, you may need to install one or more of these tools.
-
-1. `rustup toolchain install nightly --allow-downgrade` - make sure you have Rust nightly
-2. `rustup default nightly` - setup nightly as default, or you can use rust-toolchain file later on
-3. `rustup target add wasm32-unknown-unknown` - add the ability to compile Rust to WebAssembly
-4. `cargo install cargo-generate` - install `cargo-generate` binary (should be installed automatically in future)
-5. `npm install -g sass` - install `dart-sass` (should be optional in future
-
-## Compiling for Release
+### Compiling for Release
 
 ```bash
 cargo leptos build --release
@@ -57,7 +120,7 @@ cargo leptos build --release
 
 Will generate your server binary in target/server/release and your site package in target/site
 
-## Testing Your Project
+### Testing Your Project
 
 ```bash
 cargo leptos end-to-end
@@ -70,7 +133,7 @@ cargo leptos end-to-end --release
 Cargo-leptos uses Playwright as the end-to-end test tool.  
 Tests are located in end2end/tests directory.
 
-## Executing a Server on a Remote Machine Without the Toolchain
+### Executing a Server on a Remote Machine Without the Toolchain
 
 After running a `cargo leptos build --release` the minimum files needed are:
 
