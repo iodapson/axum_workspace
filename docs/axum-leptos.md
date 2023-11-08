@@ -26,13 +26,15 @@ You'll be asked to provide a name for the project. In this repo's case, it was n
 
 3. This step may not be applicable to you.
 
-Since cloning the `start-axum-workspace` project (https://github.com/Gentle/start-axum-workspace) would essentially create a new Git repo inside a directory (`<your-project's-root-directory>`) that you wish to be the root-dir of your code project, you will have to first delete the git repo inside the new sub-directory `start-axum-workspace`, and then copy all of its content into `<your-project's-root-directory>`. Change directory into `start-axum-workspace`, and then delete the git repo inside it with the following command;
+Since cloning the `start-axum-workspace` project (https://github.com/Gentle/start-axum-workspace) essentially nests a Git repo inside the directory (`<your-project's-root-directory>`) chosen to be the root-dir for your code project with its own separate Git initialization, you will have to delete the nested git repo inside directory `start-axum-workspace`, and then copy all of its content into `<your-project's-root-directory>`.
+
+To delete the Git repo inside `start-axum-workspace`, enter the following command;
 
 ```sh
 cd start-axum-workspace && rm -rf .git
 ```
 
-4. Now move all of the contents inside sub-workspace `start-axum-workspace` directly into `<your-project's-root-directory` then delete the now hollowed-out `start-axum-workspace` directory. The consecutive commands to use are:
+4. Now move-out all of the contents inside sub-workspace `start-axum-workspace` directly into `<your-project's-root-directory` then delete the now empty `start-axum-workspace` directory. The consecutive commands to use are:
 
 ```sh
 mv * ..
@@ -42,13 +44,13 @@ mv * ..
 
 <h6>N.B:</h6>
 
-- In case you ran the code inside `start-axum-workspace` before moving it into `<your-project's-root-directory>`, then make sure that you delete the `target` sub-directory inside `<your-project's-root-directory>` Delete `target` with command;
+- In case you `$ cargo build` or `$ cargo run` the code inside `start-axum-workspace` before moving it out into `<your-project's-root-directory>`, make sure that you delete the `target` sub-directory inside `start-axum-workspace`. Delete `target` with command;
 
 ```sh
 rm -rf target
 ```
 
-- In case that `<your-project's-root-directory>` is already a Git repo, manually move `.gitgnore` away from `start-axum-workspace` since it'll persist inside `start-axum-workspace` during the `mv` operation into `<your-project's-root-directory` root-dir level, earlier. Replace any prior `.gitignore` file.
+- In case `<your-project's-root-directory>` is already a Git repo with its own `.gitnore` file before you attempted to move the contents of `start-axum-workspace` into it, manually move the `.gitgnore` file inside `start-axum-workspace` into `<your-project's-root-directory` since it'll get ignored by the `mv` command used earlier inside `start-axum-workspace`. Replace any prior `.gitignore` file.
 
 ---
 
@@ -58,7 +60,7 @@ rm -rf target
 rm -rf start-axum-workspace
 ```
 
-5. Inside the `<your-project's-root-directory>` level `Cargo.toml` change parameter:
+5. Inside `<your-project's-root-directory>` root level `Cargo.toml`, change parameter:
 
 ```toml
 [[workspace.metadata.leptos]]
@@ -76,7 +78,7 @@ name = "start-axum-workspace"
 name = "<your-project's-root-directory>"
 ```
 
-6. Init a new Git repo inside `<your-project's-root-directory>` using Git commands;
+6. Initialize a new Git repo inside `<your-project's-root-directory>` using Git commands;
 
 ```sh
 git init
